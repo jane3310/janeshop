@@ -1,0 +1,82 @@
+﻿@model Janeshop.Models.TBL_PRODUCT_TYPE
+@{
+    ViewBag.Title = "TypeCreate";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<div class="h4 text-center">เพิ่มประเภทสินค้า</div>
+<div class="main-content">
+    <!-- Page content -->
+    @using (Html.BeginForm("TypeCreate", "Store", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-12 order-xl-1">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                    <div class="col-lg-4">
+
+                                        <script type="text/javascript">
+                                            function Pic01(input) {
+                                                if (input.files && input.files[0]) {
+                                                    var reader = new FileReader();
+
+                                                    reader.onload = function (e) {
+                                                        $('#image01').attr('src', e.target.result);
+                                                    }
+
+                                                    reader.readAsDataURL(input.files[0]);
+                                                }
+                                            }
+                                        </script>
+
+                                        <div class="text-center">
+                                            <img id="image01" src="~/Images/profile2.jpg" alt="" height="100" width="100" />
+                                        </div>
+                                        <label class="form-control-label" for="input-last-name">ภาพประกอบ <b style="color: red;"> *</b></label>
+                                        @Html.EditorFor(model => model.picture, new { htmlAttributes = new { @type = "file", @name = "picture", @id = "picture", @onchange = "Pic01(this);", @class = "form-control col-lg-12", required = true } })
+                                        @Html.ValidationMessageFor(model => model.picture, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                       
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">ประเภทสินค้า <b style="color: red;"> *</b></label>
+                                            @Html.EditorFor(model => model.type_name, new { htmlAttributes = new { @class = "form-control col-lg-12", required = true } })
+                                            @Html.ValidationMessageFor(model => model.type_name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <div class="container">
+                                <p align="right">
+                                    <button type="submit" class="btn btn-primary col-lg-3" onclick="return confirm('คุณต้องการที่จะบันทึกข้อมูล ใช่หรือไม่')">  --เพิ่มข้อมูล--  </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<br />

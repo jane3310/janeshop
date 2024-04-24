@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Janeshop.Models.OrderView>
+@{
+    ViewBag.Title = "CheckCart";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+<div class="container">
+    <div class="h4">
+     
+    </div>
+
+</div>
+
+@if (Model.Count() == 0)
+{
+    <h5 class="text-danger text-center">ไม่มีสินค้าในตะกร้า</h5>
+}
+else
+{
+    using (Html.BeginForm("CheckCart", "Order"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="row row-grid">
+            <div class="col-xl-12 order-xl-1">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="h5 text-center">รายการสั่งซื้อ ร้าน @ViewBag.store_name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+                <thead>
+                    <tr class="table-secondary text-center">
+                        <td><b>สินค้า</b></td>
+                        <td><b>ราคา</b></td>
+                        <td><b>จำนวน</b></td>
+                        <td><b>รวม</b></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                <br />
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="text-center">
+                                @{
+                                    List<string> result = item.tbl_product_picture.picture_url.Split(new char[] { ',' }).ToList();
+                                }
+                                @foreach (var photo in result)
+                                {
+                                    if (item.tbl_product_picture.picture_url != null)
+                                    {
+                                        <img src="@Url.Content(photo)" style="height:45px;width:45px; border-radius:20px 20px 20px 20px;" />
+                                    }
+                                }
+                                @item.tbl_product.product_name
+                            </td>
+                            <td class="text-center"> @item.tbl_product.price </td>
+                            <td class="text-center"> @item.tbl_cart.qty </td>
+                            <td class="text-right">  @Convert.ToDecimal(item.tbl_cart.pricetotal).ToString("C2") </td>
+                            <td>
+                                <a  class="btn btn-danger btn-sm" href="@Url.Action("CartDelete", "Order", new { cr_id = @item.tbl_cart.cart_id, ss_id = item.tbl_cart.store_id, p_id = item.tbl_product.product_id })">&#10008;</a>
+                              
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4" class="text-right">
+                            <div class="text-danger"><b>ราคาสุทธิ(บาท) @Convert.ToDecimal(ViewBag.pricetotal).ToString("C2") </b></div>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+
+        <div class="row">
+            <div class="col-6 text-left">
+                <a href="@Url.Action("CartShow", "Order")" class="btn btn-secondary jumbotron-fluid col-4"><i class="fas fa-store-alt"></i> ตะกร้า </a>
+            </div>
+            <div class="col-6 text-right">
+
+                @Html.Hidden("store_id", (object)ViewBag.store_id)
+                @Html.Hidden("store_name", (object)ViewBag.store_name)
+                @Html.Hidden("total_bill", (object)ViewBag.pricetotal)
+
+                @foreach (var items in Model)
+                {
+                    @Html.Hidden("cart_id", items.tbl_cart.cart_id)
+                    @Html.Hidden("product_id", items.tbl_product.product_id)
+                    @Html.Hidden("price", items.tbl_product.price)
+                    @Html.Hidden("qty", items.tbl_cart.qty)
+                }
+
+                <input type="submit" value="ยืนยันการสั่งซื้อ" class="btn btn-primary jumbotron-fluid col-6" onclick="return confirm('คุณต้องการที่จะยืนยันสั่งซื้อ ใช่หรือไม่')" />
+
+
+            </div>
+        </div>
+    }
+}
+

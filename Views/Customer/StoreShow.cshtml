@@ -1,0 +1,71 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<Janeshop.Models.TBL_OWNER>
+@{
+    ViewBag.Title = "StoreShow";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+<link href="~/css/store.css" rel="stylesheet" />
+
+<div style="font-family:JasmineUPC; font-size:30px;text-align:center" ><b> เลือกร้านค้า </b></div>
+<hr />
+
+<div style="margin-top:80px;" class="row">
+    @foreach (var item in Model)
+    {
+    <a href="@Url.Action("ProductShow", "Customer", new { s_id = item.store_id})">
+        <article>
+
+            <figure>
+                <img src="@Url.Content(item.picture)" />
+            </figure>
+
+            <div>
+                <h1 style="margin-top:-30px;">
+                    @item.store_name
+                </h1>
+
+                <h6 style="color:red;">
+                    โทร.@item.mobile
+                </h6>
+                <p style="font-size:20px; font-family:JasmineUPC">
+                  ที่อยู่ :  @item.address
+                </p>
+
+            </div>
+        </article>
+    </a>
+    }
+</div>
+
+    <script>
+        const article = document.querySelector('article');
+
+        // to compute the center of the card retrieve its coordinates and dimensions
+        const {
+            x, y, width, height,
+        } = article.getBoundingClientRect();
+        const cx = x + width / 2;
+        const cy = y + height / 2;
+
+        // following the mousemove event compute the distance betwen the cursor and the center of the card
+        function handleMove(e) {
+            const { pageX, pageY } = e;
+
+            // ! consider the relative distance in the [-1, 1] range
+            const dx = (cx - pageX) / (width / 2);
+            const dy = (cy - pageY) / (height / 2);
+
+            // rotate the card around the x axis, according to the vertical distance, and around the y acis, according to the horizontal gap
+            this.style.transform = `rotateX(${10 * dy * -1}deg) rotateY(${10 * dx}deg)`;
+        }
+
+        // following the mouseout event reset the transform property
+        function handleOut() {
+            this.style.transform = 'initial';
+        }
+
+        article.addEventListener('mousemove', handleMove);
+        article.addEventListener('mouseout', handleOut);
+    </script>

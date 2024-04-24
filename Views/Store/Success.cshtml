@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Success";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<div class="text-center">
+    <br />
+    <h4>บันทึกแล้ว</h4>
+    <br />
+    @if (ViewBag.scheck == "1")
+    {
+        <a href="@Url.Action("ProductView", "Store")"><div class="btn btn-info col-lg-11 text-light">--บันทึกข้อมูลเรียบร้อยแล้ว--</div></a>
+    }
+    else
+    {
+        <a href="@Url.Action("TypeShow", "Store")"><div class="btn btn-info col-lg-11 text-light">--บันทึกข้อมูลเรียบร้อยแล้ว--</div></a>
+    }
+
+</div>

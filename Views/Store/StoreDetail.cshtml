@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Janeshop.Models.TBL_OWNER>
+@{
+    ViewBag.Title = "StoreDetail";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<h5 class="text-center text-info"><b>รายละเอียดร้านค้า</b></h5>
+<br />
+@foreach (var item in Model)
+{
+    <div class="text-center"><img src="@Url.Content(item.picture)" style="height:auto;width:30%; border-radius:10px 10px 10px 10px;" /></div>
+    <br />
+    <div class="container mt--5 pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-7">
+                <div class="card shadow border">
+                    <div class="card-header bg-transparent pb-0">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">ชื่อร้าน</th>
+                                    <td> @Html.DisplayFor(model => item.store_name) </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ที่อยู่</th>
+                                    <td> @Html.DisplayFor(model => item.address)  </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">เบอร์โทร     </th>
+                                    <td> @Html.DisplayFor(model => item.mobile)  </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">รหัสผ่าน    </th>
+                                    <td> @Html.DisplayFor(model => item.password)  </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">อีเมล์    </th>
+                                    <td> @Html.DisplayFor(model => item.email)  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="container text-center col-7">
+    <div class="row">
+        <div class="col-12">
+            <a href="@Url.Action("StoreEdit", "Store")" class="btn btn-warning col-lg-12"><i class="fas fa-user-edit"></i> แก้ไขข้อมูล </a>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <a href="@Url.Action("Index", "Store")" class="btn btn-outline-secondary text-dark col-lg-12"><i class="fas fa-store"></i> ย้อนกลับ </a>
+        </div>
+    </div>
+</div>
+

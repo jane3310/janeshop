@@ -1,0 +1,345 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+
+@model IPagedList<Janeshop.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+}
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,900&display=swap" rel="stylesheet" />
+<link href="~/css/mains.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.0/css/bootstrap-grid.css" />
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<link href="~/css/StyleSheet1.css" rel="stylesheet" />
+<link href="~/css/font.css" rel="stylesheet" />
+<div class="">
+    <div class="row">
+        <div class="col-md-10">
+            <img style="height:100px; width:240px; margin-left:80px" src="~/Images/logoes.png" />
+        </div>
+        <div style="margin-top:40px;margin-left:70px;" class="dropdown">
+            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                จัดการระบบ
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <a class="dropdown-item" type="button" href="@Url.Action("Login", "Admin")">แอดมิน</a>
+                <a class="dropdown-item" type="button" href="@Url.Action("Login", "Store")">ร้านค้า</a>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+    </div>
+    <hr />
+    <nav class="navbar navbar-expand-lg ">
+        <a class="navbar-brand" href="#"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div style="margin-top:-15px" class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul style="margin-right:50px; font-family:JasmineUPC; font-size:25px;" class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a>  <i style="color:red" class="fas fa-home"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:gray" href="#about-section">เกี่ยวกับเรา</a>
+
+                </li>
+                <li class="nav-item">
+                    <a style="color:gray" href="#product-section">ผลิตภัณฑ์</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:gray" href="@Url.Action("BestSeller","Home")">สินค้าขายดี</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:gray" href="@Url.Action("Raregoods","Home")">สินค้าหายาก</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:gray" href="#footer-section">ติดต่อเรา</a>
+                </li>
+                <li class="nav-item">
+                    <a style="color:gray" href="@Url.Action("Login","Customer")">เข้าสู่ระบบ</a>
+                </li>
+
+                <li>
+
+                </li>
+
+            </ul>
+            <div>
+                <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"><img style="width:40px;height:40px;" src="~/Images/facebook.png" /></a>
+                <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"><img style="width:40px;height:40px;" src="~/Images/Line.png" /></a>
+                <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"> <img style="width:40px;height:40px;" src="~/Images/Location.png" /></a>
+                <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"> <img style="width:40px;height:40px;" src="~/Images/hoog.png" /></a>
+            </div>
+        </div>
+    </nav>
+    <div>
+        <img style="height:550px;width:1537px;" src="~/Images/master.png" />
+    </div>
+
+    <div id="wrapper">
+        <section class="about" id="about-section">
+            <div>
+                <div class="row">
+                    <div>
+                        <img data-aos="fade-right" style="margin-top:-10px;width:600px;margin-left:100px" src="~/Images/Home (4).gif" />
+                        <h4 style="font-family:JasmineUPC;text-align:center; margin-top:5px; margin-right:-80px;color:dimgray">
+                            <strong style="font-family:JasmineUPC;
+                    color:darkred">เปิดทุกวัน</strong> เวลา 9.00-18.00
+                        </h4>
+                    </div>
+                    <div class=" col-md-1" style=" solid red;height:200px;width:1px"></div>
+                    <div style="margin-top:180px" class="col-md-4">
+
+                        <h1 data-aos="fade-left" style="font-family:sans-serif;text-align:center;font-size:30px;color:darkred">เกี่ยวกับเรา</h1>
+                        <hr data-aos="fade-left">
+                        <h4 data-aos="fade-left" style="font-family:JasmineUPC; ">
+                            "ร้านค้าชุมชน จัดตั้งอยู่ที่ อำเภอบางปลาม้า จังหวัดสุพรรณบุรี เป็นเว็บไซต์ที่พัฒนาขึ้นเพื่อเผยแพร่ประชาสัมพันธ์ผลิตภัณฑ์ในชุมชนของอำเภอบางปลาม้าซึ่งรวมไปถึง งานหัตถกรรม
+                            ฝ้ายและผ้าไหม เครื่องปั้นดินเผา เครื่องประดับแฟชั้น ของใช้ในครัวเรือน และอาหาร โดยมีวัตถุประสงค์ เพื่อกระตุ้น ธุรกิจประกอบการท้องถิ่น ยกระดับฐานะ ความเป็นอยู่
+                            ของคนในชุมชนให้ดีขึ้น โดยการผลิตหรือจัดการทรัพยากรที่มีอยู่ในท้องถิ่นให้กลายเป็นสินค้าที่มีคุณภาพ มีจุดเด่น เป็นเอกลักษณ์ของตนเองที่สอดคล้องกับวัฒนธรรม
+                            เพื่อให้ผู้ที่สนใจสินค้าได้ซื้อกับผู้ประกอบการโดยตรงโดยตรงผ่านเว็บไซต์"
+                        </h4>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+        <hr style="margin-top:20px" id="product-section" />
+        <h1 data-aos="zoom-in" style="text-align:center;font-family: 'Charm', cursive;color:darkred;margin-top:40px;">ผลิตภัณฑ์</h1>
+        <div class="header_section">
+            <div class="container">
+                <div class="containt_main">
+                    <div class="dropdown">
+
+                    </div>
+
+                    <div class="main">
+
+                        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+                        {
+                            <!-- Another variation with a button -->
+                            <div class="input-group">
+
+                                @Html.DropDownList("district_id", (SelectList)ViewBag.district, "All District", new { @class = "btn btn-secondary dropdown-toggle text-left" })
+                                &nbsp;
+                                @Html.DropDownList("type_id", (SelectList)ViewBag.type, "All Category", new { @class = "btn btn-secondary dropdown-toggle text-left" })
+                                &nbsp;
+                                @Html.Editor("search", new { htmlAttributes = new { @class = "form-control col-lg-12 junbotron-fluid", @placeholder = "Search" } })
+
+                                <div class="input-group-append">
+                                    <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color:#f26522 ">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-1" style=" solid red;height:200px;width:1px"></div>
+            <div style="margin-top:40px;" class="col-md-10">
+                <div class="filters-content">
+                    <div class="row grid">
+
+                        @foreach (var item in Model)
+                        {
+                            <div data-aos="fade-down" class="col-lg-3 col-md-3 all des  Search">
+                                <div class="product-item">
+                                    <div class="text-center">
+                                        @{
+                                            List<string> result = item.tbl_product_picture.picture_url.Split(new char[] { ',' }).ToList();
+                                        }
+                                        @foreach (var photo in result)
+                                        {
+                                            if (item.tbl_product_picture.picture_url != null)
+                                            {
+                                                <img src="@Url.Content(photo)" style="height:160px;width:150px;margin-top:20px;" />
+                                            }
+                                            else
+                                            {
+                                            }
+                                        }
+                                    </div>
+
+                                    <div class="properties__img overlay1">
+                                        <a href=""><img src="@result[0]" alt=""></a>
+
+                                    </div>
+
+                                    <a href="#"><h5 class="card-title" style="text-align:center;font-family:sans-serif;color:darkred;font-size:20px;">@Html.DisplayFor(model => item.tbl_product.product_name)</h5></a>
+                                    <h4 style="text-align:center;font-family:sans-serif;color:#FFCC00">@Html.DisplayFor(model => item.tbl_product.price) THB</h4>
+                                    <a href="@Url.Action("ProductDetail", "Home", new { p_id = item.tbl_product.product_id})" class="btn btn-danger" style="border-radius:20px;margin-left:70px;"><i class="fas fa-eye"></i>.ดูข้อมูลเพิ่มเติม.</a>
+                                    <div class=" col-md-1" style=" solid red;height:20px;width:1px"></div>
+
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-12 text-center">
+                        @Html.PagedListPager(Model, i => Url.Action("Index", "Home", new { i, search = Request.QueryString["search"], @class = "pagination" }))
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <hr />
+        <section class="Photo" id="photo-section">
+            <h1 data-aos="zoom-in" style="text-align:center;color:darkred;margin-top:50px;font-size:35px">Photo Gallery</h1>
+
+            <div style="margin-top:40px;" class="row">
+                <div class=" col-md-1" style=" solid red;height:200px;width:1px"></div>
+
+                <div data-aos="slide-left" class="card">
+                    <div class="col-md-3 p-5">
+                        <img style="width:340px; height:260px; " src="~/Images/o1.jpg" />
+
+                    </div>
+                </div>
+
+                <div data-aos="zoom-in" style="margin-left:10px;" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o2.jpg" />
+
+                    </div>
+                </div>
+                <div data-aos="slide-right" style="margin-left:10px;" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o3.jpg" />
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top:20px;" class="row">
+                <div class=" col-md-1" style=" solid red;height:200px;width:1px"></div>
+                <div data-aos="slide-left" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o4.jpg" />
+
+                    </div>
+                </div>
+                <div data-aos="zoom-in" style="margin-left:10px;" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o5.jpg" />
+
+                    </div>
+                </div>
+                <div data-aos="slide-right" style="margin-left:10px;" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o6.jpg" />
+
+                    </div>
+                </div>
+            </div>
+            <div style="margin-top:20px;" class="row">
+                <div class=" col-md-1" style=" solid red;height:200px;width:1px"></div>
+                <div data-aos="slide-left" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o10.jpg" />
+
+                    </div>
+                </div>
+                <div data-aos="zoom-in" style="margin-left:10px;" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o8.jpg" />
+
+                    </div>
+                </div>
+                <div data-aos="slide-right" style="margin-left:10px;" class="card">
+                    <div class="col-md-3 p-5">
+
+                        <img style="width:340px; height:260px;" src="~/Images/o9.jpg" />
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr />
+    </div>
+
+
+
+
+
+
+    <footer style="background-color:#fffde7; height:240px;" id="footer-section">
+
+        <div class="row">
+            <div class="col-md-3">
+                <img style="width:280px;height:150px; margin-left:40px; margin-top:30px" src="~/Images/logos.png" />
+            </div>
+            <div class="col-md-3">
+                <h4 style="margin-top: 30px;font-family:JasmineUPC;text-align:left;color:darkred;font-size:28px;">เกี่ยวกับเรา</h4>
+                <p style="font-family:JasmineUPC;text-align:left;font-size:20px;">
+                    "ร้านค้าชุมชน จัดตั้งอยู่ที่ อำเภอบางปลาม้า จังหวัดสุพรรณบุรี เป็นเว็บไซต์ที่พัฒนาขึ้นเพื่อเผยแพร่ประชาสัมพันธ์ผลิตภัณฑ์ใรชุมชนของอำเภอบางปลาม้า เพื่อให้ผู้ที่สนใจสินค้าได้ซื้อกับผู้ประกอบการโดยตรงโดยตรงผ่านเว็บ
+                    ไซต์ เพื่อความสะดวกสบาย"
+                </p>
+            </div>
+            <div class="col-md-3">
+                <h5 style="margin-top: 30px;font-family:JasmineUPC;text-align:left;color:darkred;font-size:28px;">18 หมู่8 ต.ตะค่า อ.บางปลาม้า จ.สุพรรณบุรี 72150</h5>
+                <p style="margin-right:230px;font-size:15px;"><i style="color:#e64a19;padding:5px;" class="fas fa-phone"></i>     092-583-9511</p>
+                <p style="margin-right:230px;font-size:15px;margin-top:-10px;"><i style="color:#e64a19;padding:5px;" class="fas fa-mobile-alt" ;></i>     092-583-9511</p>
+                <p style="margin-right:165px;font-size:15px;margin-top:-10px;"><i style="color:#e64a19;padding:5px;" class="fas fa-envelope" ;></i> jannisani@gmail.com</p>
+                <p style="margin-right:158px;font-size:15px;margin-top:-10px;"><i style="color:#e64a19;padding:5px;" class="fas fa-map-marker-alt" ;></i> 14.0666245 , 99.4228371</p>
+            </div>
+            <div class="col-md-3">
+                <h4 style="margin-top: 30px;font-family:JasmineUPC;margin-right:180px;color:darkred;font-size:28px;">ติดต่อเรา</h4>
+                <div style="margin-right:180px;">
+                    <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"><img style="width:40px;height:40px;" src="~/Images/facebook.png" /></a>
+                    <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"><img style="width:40px;height:40px;" src="~/Images/Line.png" /></a>
+                    <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"> <img style="width:40px;height:40px;" src="~/Images/Location.png" /></a>
+                    <a href="https://www.facebook.com/jane.zazana/" target="facebook" title="facebook"> <img style="width:40px;height:40px;" src="~/Images/hoog.png" /></a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <footer style="background-color:#D3AD79; height:50px;">
+        <div style="font-family: 'Charm', cursive;margin-right:1150px;">
+
+        </div>
+    </footer>
+</div>
+
+
+
+
+
+</div>
+<script src="~/js/observers.js"></script>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({
+        duration: 1000,
+        offset: 120,
+        easing: 'ease-in-out'
+    });
+</script>
+
+
+
+

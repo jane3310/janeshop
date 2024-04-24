@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Janeshop.Models.OrderView>
+@{
+    ViewBag.Title = "SalePrint";
+    Layout = "~/Views/Shared/_LayoutPrint.cshtml";
+}
+
+<div class="container">
+    <div class="h4">
+        รายการขาย
+    </div>
+</div>
+@if (Model.Count() == 0)
+{
+    <h5 class="text-danger text-center"><b>ไม่พบข้อมูล</b></h5>
+}
+else
+{
+    foreach (var items in Model)
+    {
+        <div class="row row-grid">
+            <div class="col-xl-12 order-xl-1">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-6 text-left">
+                                    ชื่อลูกค้า @Html.DisplayFor(model => items.tbl_user.fname) @Html.DisplayFor(model => items.tbl_user.lname) <br />
+                                    ที่อยู่ @Html.DisplayFor(model => items.tbl_user.address) <br />
+                                    เบอร์ @Html.DisplayFor(model => items.tbl_user.mobile)
+                                </div>
+                                <div class="col-lg-6 text-right">
+                                    ร้าน @Html.DisplayFor(model => items.tbl_owner.store_name)
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row">
+                                <div class="col-lg-2">
+                                    <img src="@Url.Content(items.tbl_order.picture)" style="height:auto;width:65px; border-radius:5px 5px 5px 5px;" />
+                                </div>
+                                <div class="col-lg-8">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            วันที่/เวลา สั่งซื้อ <br />
+                                            @(((DateTime)items.tbl_order.order_time).ToString("dd MMM yy HH:mm")) น.
+
+                                        </div>
+                                        <div class="col-4">
+                                            ส่งสินค้า <br />
+                                            @if (items.tbl_order.order_send != null)
+                                            {
+                                                <div>
+                                                    @(((DateTime)items.tbl_order.order_send).ToString("dd MMM yy HH:mm"))น.
+                                                </div>
+
+                                            }
+                                        </div>
+                                        <div class="col-4">
+                                            รับสินค้า <br />
+                                            @if (items.tbl_order.order_pickup != null)
+                                            {
+                                                <div>
+                                                    @(((DateTime)items.tbl_order.order_pickup).ToString("dd MMM yy HH:mm")) น.
+                                                </div>
+
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 text-right">
+                                    <h4> @(((decimal)items.tbl_order.total_bill).ToString("C2"))</h4>
+                                    <br />
+                                    <div class="text-success">ลูกค้าได้รับสินค้าแล้ว</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+    }
+}
+
+<script>
+        myFunction();
+        //
+        window.onafterprint = function (e) {
+            closePrintView();
+        };
+
+        function myFunction() {
+            window.print();
+
+        }
+        function closePrintView() {
+            window.location.href = '@Url.Action("SaleShow", "Admin")';
+
+        }
+</script>

@@ -1,0 +1,64 @@
+﻿
+@model IEnumerable<Janeshop.Models.Store>
+@{
+    ViewBag.Title = "StoreShow";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<meta name="viewport" content="width=device-width" />
+<h4 class="text-center text-info">ข้อมูลร้านค้า</h4>
+<div class="text-left text-danger h6">
+    จำนวนร้านค้า <b>@ViewBag.CNumber</b>
+</div>
+@if (Model.Count() == 0)
+{
+    <h4 class="text-danger text-center">ไม่พบข้อมูล</h4>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-info text-center">
+                <td>ภาพ</td>
+                <td>ชื่อร้านค้า</td>
+                <td>เบอร์โทร</td>
+                <td>ที่อยู่</td>
+                <td>ตำบล</td>
+                <td>อีเมล์</td>
+                <td></td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr class="table">
+                    <td class="text-center">
+                        @{
+                            List<string> result = item.tbl_owner.picture.Split(new char[] { ',' }).ToList();
+                        }
+                        @foreach (var photo in result)
+                        {
+                            if (item.tbl_owner.picture != null)
+                            {
+                                <img src="@Url.Content(photo)" style="height:auto;width:45px; border-radius:50px 50px 50px 50px;" />
+                            }
+                            else
+                            {
+                            }
+                        }
+                    </td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_owner.store_name)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_owner.mobile)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_owner.address)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_district.district_name)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_owner.email)</td>
+                    <td class="text-center">
+                        <a href="@Url.Action("StoreEdit", "Admin", new { s_id = item.tbl_owner.store_id,d_id = item.tbl_owner.district_id})" class="btn btn-outline-primary"><i class="fas fa-edit"></i>  </a>
+                        <a href="#" class="btn btn-outline-danger">&#10008;  </a>
+                    </td>
+
+                </tr>
+            </tbody>
+        }
+    </table>
+}

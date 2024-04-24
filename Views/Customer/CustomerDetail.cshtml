@@ -1,0 +1,54 @@
+﻿
+@model IEnumerable<Janeshop.Models.TBL_USER>
+@{
+    ViewBag.Title = "CustomerDetail";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<h5 class="text-center"><b>ข้อมูลส่วนตัว</b></h5>
+<br />
+@foreach (var item in Model)
+{
+    <div class="container mt--5 pb-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-7">
+                <div class="card shadow border">
+                    <div class="card-header bg-transparent pb-0">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr>
+                                    <th scope="row">ชื่อ-สกุล</th>
+                                    <td> @Html.DisplayFor(model => item.fname) @Html.DisplayFor(model => item.lname) </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">ที่อยู่</th>
+                                    <td> @Html.DisplayFor(model => item.address)  </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">เบอร์โทร     </th>
+                                    <td> @Html.DisplayFor(model => item.mobile)  </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">รหัสผ่าน    </th>
+                                    <td> @Html.DisplayFor(model => item.password)  </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">อีเมล์    </th>
+                                    <td> @Html.DisplayFor(model => item.email)  </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="@Url.Action("CustomerEdit", "Customer")" class="btn btn-outline-warning col-lg-7"><i class="fas fa-user-edit"></i> แก้ไขข้อมูล </a>
+        </div>
+    </div>
+</div>
+<br />

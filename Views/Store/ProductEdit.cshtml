@@ -1,0 +1,75 @@
+﻿@model Janeshop.Models.TBL_PRODUCT
+@{
+    ViewBag.Title = "ProductEdit";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<div class="h4  text-center"> แก้ไขรายการสินค้า</div>
+<div class="main-content">
+    @{
+
+            using (Html.BeginForm("ProductEdit", "Store", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                @Html.HiddenFor(model => model.product_id)
+                <div class="container-fluid mt--7">
+                    <div class="row">
+                        <div class="col-xl-12 order-xl-1">
+                            <div class="card shadow">
+                                <div class="card-body">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">ประเภท <b style="color: red;"> *</b></label>
+                                                    @Html.DropDownListFor(model => model.type_id, ViewBag.product_type as SelectList, "เลือกประเภท", new { @class = "form-control col-12", required = true })
+                                                    @Html.ValidationMessageFor(model => model.type_id, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">ชื่อสินค้า <b style="color: red;"> *</b></label>
+                                                    @Html.EditorFor(model => model.product_name, new { htmlAttributes = new { id = "Product_name", @class = "form-control col-lg-12", @placeholder = "ชื่อสินค้า", required = true } })
+                                                    @Html.ValidationMessageFor(model => model.product_name, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">ราคา <b style="color: red;"> *</b></label>
+                                                    @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control col-lg-12", @placeholder = "ราคา", required = true } })
+                                                    @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">รายละเอียด <b style="color: red;"> *</b></label>
+                                                    @Html.TextAreaFor(model => model.product_detail, new { style = "width: 100%; height: 137px;", htmlAttributes = new { @class = "form-control col-lg-12", required = true } })
+                                                    @Html.ValidationMessageFor(model => model.product_detail, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label class="form-control-label" for="input-first-name">สินค้าหายาก</label>
+                                                    @Html.CheckBoxFor(model => model.IsCheck, new { type = "checkbox", @style = "width:30px;height:30px;" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="my-4" />
+                                    <div class="container">
+                                        <p align="right">
+                                            <button type="submit" class="btn btn-warning col-lg-3" onclick="return confirm('คุณต้องการที่จะบันทึกข้อมูล ใช่หรือไม่')">  --แก้ไขข้อมูล--  </button>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>   
+        }
+    }
+</div>

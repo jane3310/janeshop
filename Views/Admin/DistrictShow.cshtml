@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Janeshop.Models.TBL_DISTRICT>
+@{
+    ViewBag.Title = "DistrictShow";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<meta name="viewport" content="width=device-width" />
+<h4 class="text-center">ข้อมูลตำบล</h4>
+
+@if (Model.Count() == 0)
+{
+    <h4 class="text-danger text-center">ไม่พบข้อมูล</h4>
+}
+else
+{
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">รายชื่อตำบล</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr class="table-info text-center">
+                                <th>ชื่อตำบล</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+                            <tbody>
+                                <tr class="table">
+                                    <td class="text-center">@Html.DisplayFor(model => item.district_name)</td>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("DistrictEdit", "Admin", new { d_id = item.district_id})" class="btn btn-outline-primary"><i class="fas fa-edit"></i> </a>
+                                        <a href="@Url.Action("DistrictDelete","Admin" , new {d_id = item.district_id })" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการที่จะบันทึกข้อมูล ใช่หรือไม่')"> &#10008;</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

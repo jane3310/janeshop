@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Janeshop.Models.Product>
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<link href="~/css/font.css" rel="stylesheet" />
+
+<h1 data-aos="zoom-in" style="text-align:center;font-family: 'Charm', cursive;color:darkred;margin-top:80px;">สินค้าขายดี</h1>
+<h3 data-aos="zoom-in" style="text-align:center;font-family: 'Charm', cursive;color:darkred;">เดือน @DateTime.Now.ToString(" MMMM yyyy")</h3>
+<div class="products">
+    <div class="container">
+        <div class="row">
+            <div style="margin-top:-60px;" class="col-md-12">
+                <div class="filters-content">
+                    <div class="row grid">
+
+                        @foreach (var item in Model)
+                        {
+                            <div class="col-lg-3 col-md-3 all des  Search">
+                                <div class="product-item">
+                                    <div class="text-center">
+                                        @{
+                                            List<string> result = item.tbl_product_picture.picture_url.Split(new char[] { ',' }).ToList();
+                                        }
+                                        @foreach (var photo in result)
+                                        {
+                                            if (item.tbl_product_picture.picture_url != null)
+                                            {
+                                                <img src="@Url.Content(photo)" style="height:100px;width:100px; " />
+                                            }
+                                            else
+                                            {
+                                            }
+                                        }
+                                    </div>
+                                    <div class="properties__img overlay1">
+                                        <a href=""><img src="@result[0]" alt=""></a>
+                                    </div>
+                                    <div class="down-content">
+                                        <a href="@Url.Action("ProductShowDetail", "Home", new { p_id = item.tbl_product.product_id})"><h4>@Html.DisplayFor(model => item.tbl_product.product_name)</h4></a>
+                                        <h6>@Html.DisplayFor(model => item.tbl_product.price) บ.</h6>
+                                        <p class="text-primary">ร้าน @Html.DisplayFor(model => item.tbl_owner.store_name) </p>
+                                        <span>ขายแล้ว (@item.tbl_product.sale)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-12 text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            })
+        })
+    })
+</script>
+<script src="~/js/jquery.min.js"></script>
+
+<script src="~js/bootstrap.bundle.min.js"></script>
+<script src="~js/jquery-3.0.0.min.js"></script>
+<script src="~js/plugin.js"></script>
+<!-- sidebar -->
+<script src="~js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="~js/custom.js"></script>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+    }
+</script>

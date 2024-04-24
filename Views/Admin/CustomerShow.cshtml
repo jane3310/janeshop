@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<Janeshop.Models.TBL_USER>
+@{
+    ViewBag.Title = "CustomerShow";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<meta name="viewport" content="width=device-width" />
+<h4 class="text-center text-info">ข้อมูลลูกค้า</h4>
+<div class="text-left text-danger h6">
+    จำนวนลูกค้า <b>@ViewBag.CNumber</b>
+</div>
+@if (Model.Count() == 0)
+{
+    <h4 class="text-danger text-center">ไม่พบข้อมูล</h4>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-info text-center">
+                <td>ชื่อ-สกุล</td>
+                <td>เบอร์โทร</td>
+                <td>ที่อยู่</td>
+                <td>อีเมล์</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr class="table">                
+                    <td class="text-center">@Html.DisplayFor(model => item.fname) @Html.DisplayFor(model => item.lname)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.mobile)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.address)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.email)</td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}

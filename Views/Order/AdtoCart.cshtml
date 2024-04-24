@@ -1,0 +1,79 @@
+﻿@model  Janeshop.Models.TBL_CART
+
+@{
+    ViewBag.Title = "AdtoCart";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#submitButton").on("click", function () {
+            alert('บันทึกในตะกร้าสินค้าเรียบร้อยแล้ว');
+        });
+
+    });
+</script>
+
+<div class="container-fluid mt--7">
+    <div class="row row-grid">
+        <div class="col-xl-12 order-xl-1">
+            <div class="card shadow">
+                <div class="card-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                <div class="text-center">
+                                    <img src="@Url.Content(ViewBag.picture)" style="height:auto;width:100px; border-radius:50px 50px 50px 50px;" />
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-md-8 col-sm-6 col-12">
+                                <div class="h5 text"><b>รายการสินค้าที่เลือก</b></div>
+                                <div class="h5 text">ร้าน @ViewBag.store_name</div>
+                                <br />
+                                <div class="h5 ">ชื่อสินค้า @ViewBag.product_name</div>
+                                <div class="h5 ">รายละเอียด @ViewBag.product_detail</div>
+                                <div class="down-content text-right text-danger">
+                         
+                                    <h2> @Convert.ToDecimal(ViewBag.product_price).ToString("C2")</h2>
+                            
+                                    <p></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br />
+
+    @using (Html.BeginForm("AdtoCart", "Order", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        @Html.Hidden("product_id", (object)ViewBag.product_id)
+        @Html.Hidden("store_id", (object)ViewBag.store_id)
+        @Html.Hidden("price",(object)ViewBag.product_price)
+
+        <div class="row row-grid">
+            <div class="col-xl-12 order-xl-1">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                    <div class="h5 "><b>จำนวน</b> <input type="number" name="qty" value="1" min="1" max="10" id="qty" /> </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-12">
+                                    <button id="" type="submit" class="btn btn-primary jumbotron-fluid text-white col-lg-12"><i style="font-size:20px" class="fa">&#xf07a;</i> เพิ่มในตระกร้า</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

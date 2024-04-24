@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Janeshop.Models.Product>
+@{
+    ViewBag.Title = "ProductView";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<meta name="viewport" content="width=device-width" />
+<h4 class="text-center text-info">ข้อมูลสินค้า</h4>
+<div class="text-left text-danger h6">
+    จำนวนสินค้า <b>@ViewBag.CNumber</b> 
+</div>
+@using (Html.BeginForm("ProductShow", "Admin", FormMethod.Get))
+{
+    <div class="row">
+        <div class="col-lg-8 col-md-8 col-sm-8 col-8">
+            @Html.DropDownList("s_id", (SelectList)ViewBag.store_name, "เลือกร้านค้า", new { @class = "form-control", required = true })
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-4 col-4">
+            <button class="form-control" type="submit"><i class="fas fa-search"></i>ค้นหา</button>
+        </div>
+    </div>
+}
+<br />
+
+@if (Model.Count() == 0)
+{
+    <h4 class="text-danger text-center">ไม่พบข้อมูล</h4>
+}
+else
+{
+    <table class="table table-hover">
+        <thead>
+            <tr class="table-info text-center">
+                <td>ประเภทสินค้า</td>
+                <td>ชื่อสินค้า</td>
+                <td>ราคา</td>
+                <td>รูปสินค้า</td>
+            </tr>
+        </thead>
+        @foreach (var item in Model)
+        {
+            <tbody>
+                <tr class="table">
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_product_type.type_name)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_product.product_name)</td>
+                    <td class="text-center">@Html.DisplayFor(model => item.tbl_product.price)</td>
+                    <td class="text-center">
+                        @{
+                            List<string> result = item.tbl_product_picture.picture_url.Split(new char[] { ',' }).ToList();
+                        }
+                        @foreach (var photo in result)
+                        {
+                            if (item.tbl_product_picture.picture_url != null)
+                            {
+                                <img src="@Url.Content(photo)" style="height:auto;width:45px; border-radius:50px 50px 50px 50px;" />
+                            }
+                            else
+                            {
+                            }
+                        }
+                    </td>
+                </tr>
+            </tbody>
+        }
+    </table>
+}

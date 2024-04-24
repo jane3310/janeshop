@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Janeshop.Models.TBL_BANK>
+@{
+    ViewBag.Title = "BankShow";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+
+<meta name="viewport" content="width=device-width" />
+<h4 class="text-center">ข้อมูลบัญชีธนาคาร</h4>
+
+@if (Model.Count() == 0)
+{
+    <h4 class="text-danger text-center">ไม่พบข้อมูล</h4>
+    <div class="text-center">
+        <a href="@Url.Action("BankCreate", "Store")" class="btn btn-primary col-2"><i class="fas fa-plus"></i> </a>
+    </div>
+    <br />
+}
+else
+{
+
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <div class="row">
+                    <div class="col-6">
+                        <h6 class="m-0 font-weight-bold text-primary">รายการบัญชีธนาคาร</h6>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-right">
+                            <a href="@Url.Action("BankCreate", "Store")" class="btn btn-primary"><i class="fas fa-plus"></i> เพิ่มบัญชี </a>
+                        </div>
+                    </div>
+                </div>   
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                            <tr class="text-center">
+                                <th>ธนาคาร</th>
+                                <th>เลขบัญชี</th>
+                                <th>ชื่อบัญชี</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        @foreach (var item in Model)
+                        {
+
+                            <tbody>
+                                <tr class="table">
+                                    <td class="text-center">@Html.DisplayFor(model => item.bank_name)</td>
+                                    <td class="text-center">@Html.DisplayFor(model => item.bank_number)</td>
+                                    <td class="text-center">@Html.DisplayFor(model => item.name)</td>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("BankEdit", "Store", new { b_id = item.bank_id})" class="btn btn-outline-primary"><i class="fas fa-edit"></i> </a>
+                                        <a href="@Url.Action("BankDelete","Store" , new {b_id = item.bank_id })" class="btn btn-outline-danger" onclick="return confirm('คุณต้องการที่จะลบข้อมูล ใช่หรือไม่')"> &#10008;</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+}

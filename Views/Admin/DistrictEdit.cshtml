@@ -1,0 +1,51 @@
+﻿@model Janeshop.Models.TBL_DISTRICT
+@{
+    ViewBag.Title = "DistrictCreate";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="h4 text-center">แก้ไขตำบล</div>
+<div class="main-content">
+    <!-- Page content -->
+    @using (Html.BeginForm("DistrictEdit", "Admin", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.district_id)
+
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-12 order-xl-1">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-last-name">ชื่อตำบล <b style="color: red;"> *</b></label>
+                                            @Html.EditorFor(model => model.district_name, new { htmlAttributes = new { @class = "form-control col-lg-12", required = true } })
+                                            @Html.ValidationMessageFor(model => model.district_name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <div class="container">
+                                <p align="right">
+                                    <button type="submit" class="btn btn-primary col-lg-3" onclick="return confirm('คุณต้องการที่จะบันทึกข้อมูล ใช่หรือไม่')">  --บันทึกข้อมูล--  </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<br />

@@ -1,0 +1,86 @@
+﻿@model Janeshop.Models.TBL_ADMIN
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="../Assets/js/plugins/nucleo/css/nucleo.css" rel="stylesheet" />
+
+@section scripts {
+    <!-- <script src="~/Scripts/Script_all.js"></script>เพิ่ม-->
+}
+<br />
+
+@using (Html.BeginForm("Autherize", "Admin", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <div class="container">
+
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+
+            <div class="col-xl-8 col-lg-10 col-md-9">
+
+                <div class="card o-hidden border-bottom-danger shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row">
+                            <div class="col-lg-2"></div>
+                            <div class="col-lg-8">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">เข้าสู่ระบบ Admin</h1>
+                                    </div>
+                                    <form class="user">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.email, new { htmlAttributes = new { @type = "email", @class = "form-control form-control-user", @placeholder = "Enter Email Address..." } })
+                                            @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.password, new { htmlAttributes = new { @type = "password", @class = "form-control form-control-user", @placeholder = "Password" } })
+                                            @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="custom-control custom-checkbox small">
+                                                <input type="checkbox" class="custom-control-input" id="customCheck">
+                                                <span class="mb-0 text-sm  font-weight-bold text-warning">@Html.DisplayFor(model => model.LoginErrorMessage, String.Empty)</span>
+                                            </div>
+                                        </div>
+                                        <button type="submit" id="btn-one" class="btn btn-primary btn-block">--เข้าสู่ระบบ--</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-lg-2"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        function Contains(text_one, text_two) {
+            if (text_one.indexOf(text_two) != -1)
+                return true;
+        }
+        $("#Search").keyup(function () {
+            var searchText = $("#Search").val().toLowerCase();
+            $(".Search").each(function () {
+                if (!Contains($(this).text().toLowerCase(), searchText)) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            })
+        })
+    })
+</script>

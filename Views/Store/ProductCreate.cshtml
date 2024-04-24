@@ -1,0 +1,116 @@
+﻿@model Janeshop.Models.Product
+@{
+    ViewBag.Title = "ProductCreate";
+    Layout = "~/Views/Shared/_LayoutStore.cshtml";
+}
+<style>
+    input.larger {
+        width: 50px;
+        height: 50px;
+    }
+</style>
+
+<div class="h4  text-center"> เพิ่มรายการสินค้า</div>
+<div class="main-content">
+    <!-- Page content -->
+    @using (Html.BeginForm("ProductCreate", "Store", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="container-fluid mt--7">
+            <div class="row">
+                <div class="col-xl-12 order-xl-1">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">ประเภท <b style="color: red;"> *</b></label>
+                                            @Html.DropDownListFor(model => model.type_id, ViewBag.product_type as SelectList, "เลือกประเภท", new { @class = "form-control col-12", required = true })
+                                            @Html.ValidationMessageFor(model => model.type_id, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">ชื่อสินค้า <b style="color: red;"> *</b></label>
+                                            @Html.EditorFor(model => model.product_name, new { htmlAttributes = new { id = "Product_name", @class = "form-control col-lg-12", @placeholder = "ชื่อสินค้า", required = true } })
+                                            @Html.ValidationMessageFor(model => model.product_name, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">ราคา <b style="color: red;"> *</b></label>
+                                            @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control col-lg-12", @placeholder = "ราคา", required = true } })
+                                            @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-8">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">รายละเอียด <b style="color: red;"> *</b></label>
+                                            @Html.TextAreaFor(model => model.product_detail, new { style = "width: 100%; height: 137px;", htmlAttributes = new { @class = "form-control col-lg-12", required = true } })
+                                            @Html.ValidationMessageFor(model => model.product_detail, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <script type="text/javascript">
+                                                function Pic01(input) {
+                                                    if (input.files && input.files[0]) {
+                                                        var reader = new FileReader();
+
+                                                        reader.onload = function (e) {
+                                                            $('#image01').attr('src', e.target.result);
+                                                        }
+
+                                                        reader.readAsDataURL(input.files[0]);
+                                                    }
+                                                }
+                                            </script>
+
+                                            <div class="text-center">
+                                                <img id="image01" src="../Images/profile2.jpg" alt="" height="100" width="100" />
+                                            </div>
+                                            <label class="form-control-label" for="input-last-name">ภาพประกอบ <b style="color: red;"> *</b></label>
+                                            @Html.EditorFor(model => model.picture, new { htmlAttributes = new { @type = "file", @multiple = "multiple", @name = "picture", @id = "picture", @onchange = "Pic01(this);", @class = "form-control col-lg-12", required = true } })
+                                            @Html.ValidationMessageFor(model => model.picture, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label" for="input-first-name">จำนวน <b style="color: red;"> *</b></label>
+                                            @Html.EditorFor(model => model.amount, new { htmlAttributes = new { @type = "number", @class = "form-control col-lg-12", required = true } })
+                                            @Html.ValidationMessageFor(model => model.amount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label class="form-control-label text-danger" for="input-first-name">สินค้าหายาก</label>
+                                            <div class="form-check">
+                                                @Html.CheckBoxFor(model => model.IsCheck, new { type = "checkbox", @style = "width:30px;height:30px;" })                                           
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr class="my-4" />
+                            <div class="container">
+                                <p align="right">
+                                    <button type="submit" class="btn btn-primary col-lg-3" onclick="return confirm('คุณต้องการที่จะบันทึกข้อมูล ใช่หรือไม่')">  --เพิ่มข้อมูล--  </button>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<br />

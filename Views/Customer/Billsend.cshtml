@@ -1,0 +1,116 @@
+﻿@model Janeshop.Models.TBL_ORDER
+@using Janeshop.Models;
+
+@{
+    ViewBag.Title = "Billsend";
+    Layout = "~/Views/Shared/_LayoutCustomer.cshtml";
+}
+<div class="row row-grid">
+    <div class="col-xl-12 order-xl-1">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-6 text-left">
+                            <div class="h5">
+                                รายการสั่งซื้อร้าน @ViewBag.Store_name
+                            </div>
+                        </div>
+                        <div class="col-lg-6 text-right">
+                            ยอดที่ต้องชำระ <h4> @(((decimal)ViewBag.total_bill).ToString("C2"))</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@{
+
+    DB_JANESHOPEntities1 dbs = new DB_JANESHOPEntities1();
+    List<TBL_BANK> tbl_bank = dbs.TBL_BANK.ToList();
+
+    foreach (var item in tbl_bank.Where(x=>x.store_id == @ViewBag.stord_id))
+    {
+        <div class="row">
+            <div class="col-lg-12 col-md-12 order-xl-1">
+                <div class="card shadow">
+                    <div class="card-body">
+                        <div class="container">
+
+                            ธนาคาร : <b> @Html.DisplayFor(model => item.bank_name)</b>  <br />
+                            เลขที่ :<b> @Html.DisplayFor(model => item.bank_number) </b> <br />
+                            ชื่อบัญชี :<b> @Html.DisplayFor(model => item.name)</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    }
+}
+<br />
+<div class="row row-grid">
+    <div class="col-xl-12 order-xl-1">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="container">
+
+                    @using (Html.BeginForm("Billsend", "Customer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @Html.Hidden("order_id", (object)ViewBag.order_id)
+                        <div class="row">
+                            <div class="col-lg-12 text-center">
+                                <script type="text/javascript">
+                                    function Pic01(input) {
+                                        if (input.files && input.files[0]) {
+                                            var reader = new FileReader();
+
+                                            reader.onload = function (e) {
+                                                $('#image01').attr('src', e.target.result);
+                                            }
+
+                                            reader.readAsDataURL(input.files[0]);
+                                        }
+                                    }
+                                </script>
+                                <div class="text-center">
+                                    <img id="image01" src="" alt="" height="300" />
+                                </div><br />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <div class="h5">
+                                    อัพโหลดสลิป
+                                    @Html.EditorFor(model => model.picture, new { htmlAttributes = new { @type = "file", @name = "picture", @id = "picture", @onchange = "Pic01(this);", @class = "form-control col-lg-12", required = true } })
+                                </div>
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4"><h4></h4></div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+
+
+                                <input type="submit" value="บันทึกข้อมูล" class="btn btn-primary jumbotron-fluid col-lg-12" onclick="return confirm('คุณต้องการที่จะส่งสลิปนี้ ใช่หรือไม่')" />
+
+                            </div>
+                            <div class="col-lg-4"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
